@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
+import 'package:intl/intl.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+final format = DateFormat('EEE, d MMM yyyy HH:mm:ss', 'en_US');
+final date = 'Fri, 25 Sep 2020 12:39:53 GMT';
+
 void main() {
+  print('@ Parsing date in main()...');
+  print(format.parse(date)); // Commenting this makes the other parse call work
   runApp(MyApp());
 }
 
@@ -10,6 +19,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -65,6 +76,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print('@ Parsing date in widget build...');
+    print(format.parse(date));
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -75,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(AppLocalizations.of(context).helloWorld),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
